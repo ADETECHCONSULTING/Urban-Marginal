@@ -20,8 +20,17 @@ public class ServeurSocket extends Thread {
 	public void run(){
 		Socket socket;
 		while(true){
-			serverSocket.accept();
-			socket = serverSocket;
+			try {
+				System.out.println("le serveur attend...");
+				socket = serverSocket.accept();
+				System.out.println("le client est connecté");
+			} catch (IOException e) {
+			
+				System.out.println("erreur grave sur le socket"+e);
+				System.exit(0);
+				;
+			}
+			
 		}
 		
 		
