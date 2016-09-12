@@ -2,6 +2,7 @@ package outils.connexion;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ServeurSocket extends Thread {
 	private Object leRepertoire;
@@ -16,4 +17,14 @@ public class ServeurSocket extends Thread {
 		}super.start();
 	}
 	
+	public void run(){
+		Socket socket;
+		while(true){
+			serverSocket.accept();
+			socket = serverSocket;
+		}
+		
+		
+		
+	}
 }
