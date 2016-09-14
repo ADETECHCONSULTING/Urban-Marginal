@@ -1,7 +1,11 @@
 package controleur;
 
+import java.net.ServerSocket;
+
 import javax.swing.JFrame;
 
+import outils.connexion.ClientSocket;
+import outils.connexion.ServeurSocket;
 import vue.EntreeJeu;
 
 public class Controle {
@@ -24,7 +28,12 @@ public class Controle {
 	}
 
 	private void evenementEntreeJeu(Object info) {
-		
+		if((String)info == "serveur"){
+			new ServeurSocket(this, 6666);
+		}
+		else{
+			new ClientSocket((String)info, 6666, this).isConnexionOk();
+		}
 		
 	}
 
