@@ -32,7 +32,7 @@ public class EntreeJeu extends JFrame {
 	}
 	
 	private void btnConnect_clic(){
-		controle.evenementVue(this,txtIp.getText()) ;
+		controle.evenementVue(this,txtIp.getText());
 	}
 
 
