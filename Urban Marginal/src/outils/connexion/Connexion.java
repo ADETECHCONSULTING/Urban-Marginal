@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.Socket;
 
 import javax.swing.JOptionPane;
+
+import controleur.Controle;
 public class Connexion extends Thread {
 	private Object leRepertoire;
 	private ObjectInputStream in;
@@ -23,6 +25,7 @@ public class Connexion extends Thread {
 			System.exit(0);
 		}
 		super.start();
+		((controleur.Controle)this.leRepertoire).setConnexion(this);
 	}
 	
 	public void run(){
@@ -50,5 +53,13 @@ public class Connexion extends Thread {
 		
 	}
 	
+	public void envoi(Object unObjet){
+		try {
+			out.writeObject(unObjet);
+			out.flush();
+		} catch (IOException e) {
+			System.out.println("erreur sur l'objet out");
+		}
+	}
 
 }
