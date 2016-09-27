@@ -17,6 +17,6 @@ public interface Global {
 	int NBPERSOS = 3; // nombre de personnages
 	int H_PERSO = 44; //taille de l'image du personnage
 	int L_PERSO = 39; 
-	String SEPRARE = "~";
+	String SEPARE = "~";
 	int PSEUDO = 0;
 }

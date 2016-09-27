@@ -52,6 +52,7 @@ public class Controle implements Global {
 		else{
 			new ClientSocket((String)info, PORT, this).isConnexionOk();
 			leJeu = new JeuClient();
+			leJeu.setConnexion(connexion);
 			frmArene = new Arene();
 			frmEntreeJeu.dispose();
 			frmChoixJoueur = new Choice(this);
@@ -63,6 +64,9 @@ public class Controle implements Global {
 	private void evenementChoixJoueur(Object info){
 		if((String)info == "serveur"){
 			new ServeurSocket(this, PORT);
+			((modele.JeuClient)this.leJeu).envoi(connexion, info);
+			frmChoixJoueur.dispose();
+			frmArene.setVisible(true);
 		}
 	}
 	

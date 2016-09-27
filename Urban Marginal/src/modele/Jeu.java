@@ -8,7 +8,7 @@ public abstract class Jeu {
 	
 	public abstract void setConnexion(Connexion connexion);
 	
-	public abstract void reception(Connexion connexion, Object info);
+	public abstract void reception(Object info);
 	
 	public void envoi(Connexion connexion, Object info){
 		connexion.envoi(info);

@@ -10,8 +10,8 @@ private Connexion connexion;
 	}
 
 	@Override
-	public void reception(Connexion connexion, Object info) {
-		
+	public void reception(Object info) {
+		super.envoi(connexion, info);
 	}
 
 	@Override

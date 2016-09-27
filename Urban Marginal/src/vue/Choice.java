@@ -142,7 +142,7 @@ public class Choice extends JFrame implements Global {
 			txtPseudo.requestFocus();
 		}
 		else{
-			controle.evenementVue(this, "");
+			controle.evenementVue(this, PSEUDO+SEPARE+txtPseudo.getText()+SEPARE+numPerso);
 		}
 
 	}
