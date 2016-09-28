@@ -36,6 +36,7 @@ public class Connexion extends Thread {
 		while(inOk == true){
 			try {
 				reception = in.readObject();
+				((controleur.Controle)this.leRepertoire).receptionInfo(this, reception);
 			} catch (ClassNotFoundException e) {
 				System.out.println("probleme ce n'est pas un objet"+ e);
 				System.exit(0);

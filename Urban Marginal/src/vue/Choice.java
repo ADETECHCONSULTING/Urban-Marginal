@@ -113,7 +113,7 @@ public class Choice extends JFrame implements Global {
 		lblFond.setBounds(0, 0, 400, 275);
 		lblFond.setIcon(new ImageIcon(FONDCHOIX));
 		contentPane.add(lblFond);
-		controle = new Controle();
+		this.controle = controle;
 		txtPseudo.requestFocus();
 		numPerso = 1;
 		affichePerso();
@@ -121,19 +121,19 @@ public class Choice extends JFrame implements Global {
 
 	public void lblPrecedent_clic() {
 		numPerso--;
-		lblPersonnage.setIcon(new ImageIcon(PERSO + numPerso + MARCHE + 1 + "d" + DROITE + EXTIMAGE));
-		if(numPerso <= 1){
-			numPerso = 4;
+		
+		if(numPerso == 0){
+			numPerso = NBPERSOS;
 		}
+		affichePerso();
 	}
 
-	public void lblSuivant_clic() {
-			numPerso++;
-			lblPersonnage.setIcon(new ImageIcon(PERSO + numPerso + MARCHE + 1 + "d" + DROITE + EXTIMAGE));
-			if(numPerso >= NBPERSOS){
+	public void lblSuivant_clic() {	
+			if(numPerso == NBPERSOS){
 				numPerso = 0;
 			}
-		
+			numPerso++;
+			affichePerso();
 	}
 
 	public void lblGo_clic() {

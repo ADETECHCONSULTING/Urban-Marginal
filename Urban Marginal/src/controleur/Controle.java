@@ -35,7 +35,7 @@ public class Controle implements Global {
 		if(uneFrame instanceof EntreeJeu){
 			evenementEntreeJeu(info);
 		}
-		else if(uneFrame instanceof EntreeJeu){
+		if(uneFrame instanceof Choice){
 			evenementChoixJoueur(info);
 		}
 		
@@ -52,8 +52,8 @@ public class Controle implements Global {
 		else{
 			new ClientSocket((String)info, PORT, this).isConnexionOk();
 			leJeu = new JeuClient();
-			leJeu.setConnexion(connexion);
 			frmArene = new Arene();
+			leJeu.setConnexion(connexion);
 			frmEntreeJeu.dispose();
 			frmChoixJoueur = new Choice(this);
 			frmChoixJoueur.setVisible(true);
@@ -62,16 +62,17 @@ public class Controle implements Global {
 	}
 	
 	private void evenementChoixJoueur(Object info){
-		if((String)info == "serveur"){
-			new ServeurSocket(this, PORT);
-			((modele.JeuClient)this.leJeu).envoi(connexion, info);
+			((modele.JeuClient)this.leJeu).envoi(info);
 			frmChoixJoueur.dispose();
 			frmArene.setVisible(true);
-		}
 	}
 	
 	public void setConnexion(Connexion connexion){
 		this.connexion = connexion;
+	}
+	
+	public void receptionInfo(Connexion connexion, Object info){
+		leJeu.reception(info);
 	}
 
 }

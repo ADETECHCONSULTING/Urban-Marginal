@@ -19,4 +19,10 @@ public interface Global {
 	int L_PERSO = 39; 
 	String SEPARE = "~";
 	int PSEUDO = 0;
+	int H_ARENE = 600;
+	int L_ARENE = 800;
+	int H_CHAT = 200;
+	int H_SAISIE = 25;
+	int MARGE = 5; // la marge sert pour l'écart entre les objets
+	String FONDARENE = CHEMINFONDS + "fondarene.jpg";
 }

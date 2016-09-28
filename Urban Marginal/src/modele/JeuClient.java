@@ -11,12 +11,16 @@ private Connexion connexion;
 
 	@Override
 	public void reception(Object info) {
-		super.envoi(connexion, info);
+		
 	}
 
 	@Override
 	public void deconnexion(Connexion connexion) {
 		
+	}
+	
+	public void envoi(Object info){
+		super.envoi(connexion, info);
 	}
 
 }

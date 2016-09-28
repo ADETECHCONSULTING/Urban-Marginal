@@ -10,8 +10,8 @@ public class JeuServeur extends Jeu {
 	}
 
 	@Override
-	public void reception(Connexion connexion, Object info) {
-		
+	public void reception(Object info) {
+		System.out.println(info);
 	}
 
 	@Override
