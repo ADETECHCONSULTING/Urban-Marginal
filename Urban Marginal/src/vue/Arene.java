@@ -19,6 +19,8 @@ public class Arene extends JFrame implements Global {
 	private JPanel contentPane;
 	private JTextField txtSaisie;
 	private JTextField txtChat;
+	private JPanel jpnMurs;
+	private JPanel jpnJeu;
 
 	/**
 	 * Create the frame.
@@ -31,13 +33,13 @@ public class Arene extends JFrame implements Global {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel jpnJeu = new JPanel();
+		jpnJeu = new JPanel();
 		jpnJeu.setBounds(0, 0, L_ARENE, H_ARENE);
 		jpnJeu.setOpaque(false);
 		contentPane.add(jpnJeu);
 		jpnJeu.setLayout(null);
 		
-		JPanel jpnMurs = new JPanel();
+		jpnMurs = new JPanel();
 		jpnMurs.setBounds(0, 0, L_ARENE, H_ARENE);
 		contentPane.add(jpnMurs);
 		jpnMurs.setOpaque(false);
@@ -61,5 +63,10 @@ public class Arene extends JFrame implements Global {
 		txtChat = new JTextField();
 		jspChat.setViewportView(txtChat);
 		txtChat.setColumns(10);
+	}
+	
+	public void ajoutMur(JLabel objet){
+		jpnMurs.add(objet);
+		jpnMurs.repaint();
 	}
 }

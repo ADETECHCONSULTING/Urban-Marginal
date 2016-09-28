@@ -3,6 +3,7 @@ package controleur;
 import java.net.ServerSocket;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import modele.Jeu;
 import modele.JeuClient;
@@ -47,6 +48,7 @@ public class Controle implements Global {
 			leJeu = new JeuServeur(this);
 			frmEntreeJeu.dispose();
 			frmArene = new Arene();
+			((JeuServeur)this.leJeu).constructionMurs();
 			frmArene.setVisible(true);
 		}
 		else{
@@ -74,7 +76,18 @@ public class Controle implements Global {
 	public void receptionInfo(Connexion connexion, Object info){
 		leJeu.reception(info);
 	}
-
+	
+	public void evenementModele(Object unJeu, String ordre, Object info){
+		if(unJeu instanceof JeuServeur){
+			evenementJeuServeur(ordre, info);
+		}
+	}
+	
+	public void evenementJeuServeur(String ordre, Object info){
+		if(ordre == "ajout mur"){
+			frmArene.ajoutMur((JLabel)info);
+		}
+	}
 }
 
 
