@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import modele.Jeu;
 import modele.JeuClient;
@@ -71,6 +72,9 @@ public class Controle implements Global {
 	
 	public void setConnexion(Connexion connexion){
 		this.connexion = connexion;
+		if(leJeu instanceof JeuServeur){
+			leJeu.setConnexion(connexion);
+		}
 	}
 	
 	public void receptionInfo(Connexion connexion, Object info){
@@ -81,11 +85,23 @@ public class Controle implements Global {
 		if(unJeu instanceof JeuServeur){
 			evenementJeuServeur(ordre, info);
 		}
+		if(unJeu instanceof JeuClient){
+			evenementJeuClient(ordre, info);
+		}
 	}
 	
 	public void evenementJeuServeur(String ordre, Object info){
 		if(ordre == "ajout mur"){
 			frmArene.ajoutMur((JLabel)info);
+		}
+		if(ordre == "envoi panel murs"){
+			((JeuServeur)leJeu).envoi((outils.connexion.Connexion)info, frmArene.getJpnMurs());
+		}
+	}
+	
+	public void evenementJeuClient(String ordre, Object info){
+		if(ordre == "ajout panel murs"){
+			frmArene.ajoutPanelMur((JPanel)info);
 		}
 	}
 }
