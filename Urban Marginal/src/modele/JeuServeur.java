@@ -19,7 +19,12 @@ public class JeuServeur extends Jeu implements Global {
 
 	@Override
 	public void reception(Object info) {
-		System.out.println(info);
+		String[] infos = ((String)info).split(SEPARE);
+		switch(Integer.parseInt(infos[0])){
+		case PSEUDO :
+			lesJoueurs.get(info).initPerso(infos[1], Integer.parseInt(infos[2]));
+			break;
+		}
 	}
 
 	@Override

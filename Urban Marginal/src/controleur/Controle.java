@@ -31,6 +31,7 @@ public class Controle implements Global {
 	public Controle(){ // Controleur qui appelle EntreeJeu et affiche la fenetre
 		frmEntreeJeu = new EntreeJeu(this);
 		frmEntreeJeu.setVisible(true);
+		frmArene = new Arene();
 	}
 	
 	public void evenementVue(JFrame uneFrame, Object info){
@@ -48,20 +49,20 @@ public class Controle implements Global {
 			new ServeurSocket(this, PORT);
 			leJeu = new JeuServeur(this);
 			frmEntreeJeu.dispose();
-			frmArene = new Arene();
+			
 			((JeuServeur)this.leJeu).constructionMurs();
 			frmArene.setVisible(true);
 		}
 		else{
-			new ClientSocket((String)info, PORT, this).isConnexionOk();
-			leJeu = new JeuClient();
-			frmArene = new Arene();
-			leJeu.setConnexion(connexion);
-			frmEntreeJeu.dispose();
-			frmChoixJoueur = new Choice(this);
-			frmChoixJoueur.setVisible(true);
+			 if (new ClientSocket((String)info, PORT, this).isConnexionOk()){
+	                leJeu = new JeuClient(this);
+	                leJeu.setConnexion(connexion);
+	                frmArene = new Arene();
+	                frmEntreeJeu.dispose();
+	                frmChoixJoueur = new Choice(this);
+	                frmChoixJoueur.setVisible(true);
+	            }
 		}
-		
 	}
 	
 	private void evenementChoixJoueur(Object info){
@@ -95,7 +96,7 @@ public class Controle implements Global {
 			frmArene.ajoutMur((JLabel)info);
 		}
 		if(ordre == "envoi panel murs"){
-			((JeuServeur)leJeu).envoi((outils.connexion.Connexion)info, frmArene.getJpnMurs());
+			((modele.JeuServeur)leJeu).envoi((outils.connexion.Connexion)info, frmArene.getJpnMurs());
 		}
 	}
 	

@@ -2,10 +2,17 @@ package modele;
 
 import javax.swing.JPanel;
 
+import controleur.Controle;
 import outils.connexion.Connexion;
 
 public class JeuClient extends Jeu {
 private Connexion connexion;
+private Controle controle;
+
+	public JeuClient(Controle controle){
+		this.controle = controle;
+	}
+
 	@Override
 	public void setConnexion(Connexion connexion) {
 		this.connexion = connexion;

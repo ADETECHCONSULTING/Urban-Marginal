@@ -4,7 +4,7 @@ import controleur.Controle;
 import outils.connexion.Connexion;
 
 public abstract class Jeu {
-	protected Controle controle = new Controle();
+	protected Controle controle;
 	
 	public abstract void setConnexion(Connexion connexion);
 	
