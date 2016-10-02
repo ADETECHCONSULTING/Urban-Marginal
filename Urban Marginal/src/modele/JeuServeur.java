@@ -22,7 +22,7 @@ public class JeuServeur extends Jeu implements Global {
 		String[] infos = ((String)info).split(SEPARE);
 		switch(Integer.parseInt(infos[0])){
 		case PSEUDO :
-			lesJoueurs.get(info).initPerso(infos[1], Integer.parseInt(infos[2]));
+			lesJoueurs.get(info).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
 			break;
 		}
 	}

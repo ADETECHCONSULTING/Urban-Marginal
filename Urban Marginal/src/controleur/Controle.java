@@ -1,7 +1,5 @@
 package controleur;
 
-import java.net.ServerSocket;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
