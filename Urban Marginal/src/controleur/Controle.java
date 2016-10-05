@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import modele.Jeu;
 import modele.JeuClient;
 import modele.JeuServeur;
+import modele.Label;
 import outils.connexion.ClientSocket;
 import outils.connexion.Connexion;
 import outils.connexion.ServeurSocket;
@@ -77,7 +78,8 @@ public class Controle implements Global {
 	}
 	
 	public void receptionInfo(Connexion connexion, Object info){
-		leJeu.reception(info);
+		System.out.println("recepInfo");
+		leJeu.reception(connexion, info);
 	}
 	
 	public void evenementModele(Object unJeu, String ordre, Object info){
@@ -96,11 +98,18 @@ public class Controle implements Global {
 		if(ordre == "envoi panel murs"){
 			((modele.JeuServeur)leJeu).envoi((outils.connexion.Connexion)info, frmArene.getJpnMurs());
 		}
+		if(ordre == "ajout joueur"){
+			frmArene.ajoutJoueur((JLabel)info);
+			
+		}
 	}
 	
 	public void evenementJeuClient(String ordre, Object info){
 		if(ordre == "ajout panel murs"){
 			frmArene.ajoutPanelMur((JPanel)info);
+		}
+		if(ordre == "ajout joueur"){
+			frmArene.ajoutModifJoueur(((Label) info).getNumLabel(), ((Label)info).getjLabel());
 		}
 	}
 }

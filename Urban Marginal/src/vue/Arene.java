@@ -83,5 +83,20 @@ public class Arene extends JFrame implements Global {
 		return jpnMurs;
 	}
 	
+	public void ajoutJoueur(JLabel unJoueur){
+		jpnJeu.add(unJoueur);
+		System.out.println(unJoueur);
+		jpnJeu.repaint();
+	}
+	
+	public void ajoutModifJoueur(int num, JLabel unLabel){
+		try {
+			jpnJeu.remove(num);
+		} catch (Exception e) {
+			System.out.println("erreur lors de la suppression du joueur coté client : " + e);
+		}
+		jpnJeu.add(unLabel,num);
+		jpnJeu.repaint();
+	}
 	
 }

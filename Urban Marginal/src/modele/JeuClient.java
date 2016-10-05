@@ -19,9 +19,12 @@ private Controle controle;
 	}
 
 	@Override
-	public void reception(Object info) {
+	public void reception(Connexion connexion, Object info) {
 		if(info instanceof JPanel){
 			controle.evenementModele(this, "ajout panel murs", info);
+		}
+		if(info instanceof Label){
+			controle.evenementModele(this, "ajout joueur", info);
 		}
 	}
 

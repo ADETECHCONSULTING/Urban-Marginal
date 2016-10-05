@@ -13,16 +13,18 @@ public class JeuServeur extends Jeu implements Global {
 
 	@Override
 	public void setConnexion(Connexion connexion) {
-		lesJoueurs.put(connexion, new Joueur());
-		controle.evenementModele(this, "envoi panel murs", connexion);
+		lesJoueurs.put(connexion, new Joueur(this));
+		
 	}
 
 	@Override
-	public void reception(Object info) {
+	public void reception(Connexion connexion, Object info) {
+		controle.evenementModele(this, "envoi panel murs", connexion);
 		String[] infos = ((String)info).split(SEPARE);
 		switch(Integer.parseInt(infos[0])){
 		case PSEUDO :
-			lesJoueurs.get(info).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
+			System.out.println("reception pseudo");
+			lesJoueurs.get(connexion).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
 			break;
 		}
 	}
@@ -43,4 +45,22 @@ public class JeuServeur extends Jeu implements Global {
 			controle.evenementModele(this, "ajout mur",lesMurs.get(i).getLabel().getjLabel());
 		}
 	}
+	
+	public void nouveauLabelJeu(Label label){
+		controle.evenementModele(this, "ajout joueur", label.getjLabel());
+	}
+
+	/* (non-Javadoc)
+	 * @see modele.Jeu#envoi(outils.connexion.Connexion, java.lang.Object)
+	 */
+	public void envoi(Object info) {
+		
+		for(Connexion uneConnexion : lesJoueurs.keySet()){
+			super.envoi(uneConnexion, info);
+		}
+		
+	}
+	
+	
+	
 }
