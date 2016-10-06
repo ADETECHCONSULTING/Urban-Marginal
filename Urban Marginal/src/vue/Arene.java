@@ -2,13 +2,20 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controleur.Controle;
 import controleur.Global;
+import modele.Joueur;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,11 +28,22 @@ public class Arene extends JFrame implements Global {
 	private JTextField txtChat;
 	private JPanel jpnMurs;
 	private JPanel jpnJeu;
-
+	private Boolean client;
+	private Controle controle;
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	public Arene() {
+	public Arene(String typeJeu, Controle controle) {
+		this.controle = controle; 
+		if(typeJeu == "client"){
+			this.client = true;
+		}
+		else{
+			this.client = false;
+		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, L_ARENE+3*MARGE, H_ARENE+H_CHAT);
 		contentPane = new JPanel();
@@ -50,11 +68,21 @@ public class Arene extends JFrame implements Global {
 		lblFond.setIcon(new ImageIcon(FONDARENE));
 		contentPane.add(lblFond);
 		
-		txtSaisie = new JTextField();
-		txtSaisie.setBounds(0, H_ARENE, L_ARENE, H_SAISIE);
-		contentPane.add(txtSaisie);
-		txtSaisie.setColumns(10);
+		if(client == true){	
+			txtSaisie = new JTextField();
+			txtSaisie.setBounds(0, H_ARENE, L_ARENE, H_SAISIE);
+			contentPane.add(txtSaisie);
+			txtSaisie.setColumns(10);
 		
+		txtSaisie.addKeyListener(new KeyAdapter() 
+		{
+			@Override
+			public void keyPressed(KeyEvent arg0) 
+			{
+				txtSaisie_keyPressed(arg0);
+			}
+		});
+		}
 		JScrollPane jspChat = new JScrollPane();
 		jspChat.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jspChat.setBounds(0, H_ARENE + H_SAISIE, L_ARENE, H_CHAT - H_SAISIE - 7*MARGE);
@@ -85,18 +113,26 @@ public class Arene extends JFrame implements Global {
 	
 	public void ajoutJoueur(JLabel unJoueur){
 		jpnJeu.add(unJoueur);
-		System.out.println(unJoueur);
 		jpnJeu.repaint();
 	}
 	
 	public void ajoutModifJoueur(int num, JLabel unLabel){
 		try {
-			jpnJeu.remove(num);
-		} catch (Exception e) {
-			System.out.println("erreur lors de la suppression du joueur coté client : " + e);
-		}
-		jpnJeu.add(unLabel,num);
-		jpnJeu.repaint();
+			this.jpnJeu.remove(num);
+		} catch (ArrayIndexOutOfBoundsException e) {}
+			this.jpnJeu.add(unLabel, num);
+			this.jpnJeu.repaint();
 	}
 	
+	private void txtSaisie_keyPressed(KeyEvent arg0){
+		if(arg0.getKeyCode() == KeyEvent.VK_ENTER ){
+			controle.evenementVue(this, CHAT+SEPARE+txtSaisie.getText());
+			txtSaisie.setText("");
+			contentPane.requestFocus();
+		}
+	}
+	
+	public void ajoutChat(String unePhrase){
+		txtChat.setText(unePhrase+"\r\n"+txtChat.getText());
+	}
 }

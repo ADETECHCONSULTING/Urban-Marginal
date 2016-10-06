@@ -9,12 +9,12 @@ import outils.connexion.Connexion;
 
 public class JeuServeur extends Jeu implements Global {
 	private ArrayList<Mur> lesMurs = new ArrayList<>();
+	private ArrayList<Joueur> lesJoueursDansLordre = new ArrayList<Joueur>();
 	private Hashtable<Connexion, Joueur> lesJoueurs = new Hashtable<>();
 
 	@Override
 	public void setConnexion(Connexion connexion) {
 		lesJoueurs.put(connexion, new Joueur(this));
-		
 	}
 
 	@Override
@@ -23,8 +23,16 @@ public class JeuServeur extends Jeu implements Global {
 		String[] infos = ((String)info).split(SEPARE);
 		switch(Integer.parseInt(infos[0])){
 		case PSEUDO :
-			System.out.println("reception pseudo");
+			for(Joueur unJoueur : lesJoueursDansLordre){
+				super.envoi(connexion, unJoueur.label);
+				super.envoi(connexion, unJoueur.getMessage());
+			}
 			lesJoueurs.get(connexion).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
+			lesJoueursDansLordre.add(this.lesJoueurs.get(connexion));
+			break;
+		case CHAT : 
+			String laPhrase = lesJoueurs.get(connexion).getPseudo()+" > "+ infos[1];
+			controle.evenementModele(this, "ajout phrase", laPhrase);
 			break;
 		}
 	}

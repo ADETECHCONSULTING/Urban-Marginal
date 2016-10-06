@@ -57,8 +57,8 @@ public class Connexion extends Thread {
 	public synchronized void envoi(Object unObjet){
 		try {
 			this.out.reset();
-			out.writeObject(unObjet);
-			out.flush();
+			this.out.writeObject(unObjet);
+			this.out.flush();
 		} catch (IOException e) {
 			System.out.println("erreur sur l'objet out");
 		}

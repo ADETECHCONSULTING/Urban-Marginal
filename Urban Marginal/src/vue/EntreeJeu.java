@@ -25,8 +25,7 @@ public class EntreeJeu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtIp;
-	private Controle controle;
-	
+	private Controle controle; 
 	private void btnStart_clic(){
 		controle.evenementVue(this, "serveur");
 	}
