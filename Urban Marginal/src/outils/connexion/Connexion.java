@@ -57,14 +57,9 @@ public class Connexion extends Thread {
 	public synchronized void envoi(Object unObjet){
 		try {
 			this.out.reset();
-<<<<<<< master
 			this.out.writeObject(unObjet);
 			this.out.reset();
 			this.out.flush();
-=======
-			out.writeObject(unObjet);
-			out.flush();
->>>>>>> f7892db Chat semi-fonctionnel
 		} catch (IOException e) {
 			System.out.println("erreur sur l'objet out");
 		}

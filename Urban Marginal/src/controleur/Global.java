@@ -32,6 +32,7 @@ public interface Global {
 	public static final int H_MUR = 35;
 	public static final int L_MUR = 34;
 	public static final int H_MESSAGE = 8;
+<<<<<<< master
 =======
 
 	public static final int PORT = 6666;
@@ -72,4 +73,7 @@ public interface Global {
 	
 
 >>>>>>> branch 'master' of https://github.com/gmanzola/TP-URBAN-MARGINAL.git
+=======
+	public static final int CHAT = 1;
+>>>>>>> 8d85b82 BUG
 }

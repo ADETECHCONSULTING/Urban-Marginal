@@ -3,13 +3,20 @@ package vue;
 <<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controleur.Controle;
 import controleur.Global;
+import modele.Joueur;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,11 +29,13 @@ public class Arene extends JFrame implements Global {
 	private JTextField txtChat;
 	private JPanel jpnMurs;
 	private JPanel jpnJeu;
-
+	private Boolean client;
+	private Controle controle;
+	
+	
 	/**
 	 * Create the frame.
 	 */
-<<<<<<< master
 	public Arene(String typeJeu, Controle controle) {
 		this.controle = controle; 
 		
@@ -37,9 +46,6 @@ public class Arene extends JFrame implements Global {
 			this.client = false;
 		}
 		
-=======
-	public Arene() {
->>>>>>> f7892db Chat semi-fonctionnel
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, L_ARENE+3*MARGE, H_ARENE+H_CHAT);
 		contentPane = new JPanel();
@@ -64,7 +70,6 @@ public class Arene extends JFrame implements Global {
 		lblFond.setIcon(new ImageIcon(FONDARENE));
 		contentPane.add(lblFond);
 		
-<<<<<<< master
 		if (client) {
 			txtSaisie = new JTextField();
 			txtSaisie.setBounds(0, H_ARENE, L_ARENE, H_SAISIE);
@@ -79,13 +84,6 @@ public class Arene extends JFrame implements Global {
 			});
 		}
 
-=======
-		txtSaisie = new JTextField();
-		txtSaisie.setBounds(0, H_ARENE, L_ARENE, H_SAISIE);
-		contentPane.add(txtSaisie);
-		txtSaisie.setColumns(10);
-		
->>>>>>> f7892db Chat semi-fonctionnel
 		JScrollPane jspChat = new JScrollPane();
 		jspChat.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		jspChat.setBounds(0, H_ARENE + H_SAISIE, L_ARENE, H_CHAT - H_SAISIE - 7*MARGE);
@@ -116,13 +114,11 @@ public class Arene extends JFrame implements Global {
 	
 	public void ajoutJoueur(JLabel unJoueur){
 		jpnJeu.add(unJoueur);
-		System.out.println(unJoueur);
 		jpnJeu.repaint();
 	}
 	
 	public void ajoutModifJoueur(int num, JLabel unLabel){
 		try {
-<<<<<<< master
 			System.out.println(this.jpnJeu);
 			this.jpnJeu.remove(num);
 		} catch (ArrayIndexOutOfBoundsException e) {}
@@ -138,17 +134,9 @@ public class Arene extends JFrame implements Global {
 				txtSaisie.setText("");
 			}
 			contentPane.requestFocus();
-=======
-			jpnJeu.remove(num);
-		} catch (Exception e) {
-			System.out.println("erreur lors de la suppression du joueur coté client : " + e);
->>>>>>> f7892db Chat semi-fonctionnel
 		}
-		jpnJeu.add(unLabel,num);
-		jpnJeu.repaint();
 	}
 	
-<<<<<<< master
 	/**
 	 * @return the txtChat
 	 */
@@ -163,6 +151,7 @@ public class Arene extends JFrame implements Global {
 	public void ajoutChat(String unePhrase){
 		txtChat.setText(unePhrase+ "\r\n" + txtChat.getText());
 	}
+<<<<<<< master
 =======
 >>>>>>> f7892db Chat semi-fonctionnel
 =======
@@ -301,4 +290,6 @@ public class Arene extends JFrame implements Global {
 	}
 
 >>>>>>> branch 'master' of https://github.com/gmanzola/TP-URBAN-MARGINAL.git
+=======
+>>>>>>> 8d85b82 BUG
 }
