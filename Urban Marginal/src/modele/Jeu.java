@@ -1,6 +1,7 @@
 package modele;
 
 import controleur.Controle;
+<<<<<<< HEAD
 import outils.connexion.Connexion;
 
 public abstract class Jeu {
@@ -18,3 +19,22 @@ public abstract class Jeu {
 }
 
 
+=======
+import outils.connexion.Connection;
+
+public abstract class Jeu {
+
+	protected Controle controle;
+
+	public abstract void setConnection(Connection connection);
+
+	public abstract void reception(Connection connection, Object info);
+
+	public void envoi(Connection connection, Object info) {
+		connection.envoi(info);
+	}
+
+	public abstract void deconnection(Connection connection);
+
+}
+>>>>>>> branch 'master' of https://github.com/gmanzola/TP-URBAN-MARGINAL.git

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.swing.JLabel;
 
+<<<<<<< HEAD
 public class Label implements Serializable {
 	public static int nbLabel;
 	private int numLabel;
@@ -49,5 +50,47 @@ public class Label implements Serializable {
 		Label.nbLabel = nbLabel;
 	}
 	
+=======
+public class Label implements Serializable{
+	
+	private static int nbLabel;
+	private int numLabel;
+	private JLabel jLabel;
+	
+	
+	public Label (int numLabel, JLabel jLabel){
+		this.numLabel = numLabel;
+		this.jLabel = jLabel;
+		
+	}
+	
+	/**
+	 * @return the numLabel
+	 */
+	public int getNumLabel() {
+		return numLabel;
+	}
+
+	/**
+	 * @return the jLabel
+	 */
+	public JLabel getjLabel() {
+		return jLabel;
+	}
+
+	/**
+	 * @return the nbLabel
+	 */
+	public static int getNbLabel() {
+		return nbLabel;
+	}
+
+	/**
+	 * @param nbLabel the nbLabel to set
+	 */
+	public static void setNbLabel(int nbLabel) {
+		Label.nbLabel = nbLabel;
+	}
+>>>>>>> branch 'master' of https://github.com/gmanzola/TP-URBAN-MARGINAL.git
 
 }

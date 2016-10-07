@@ -28,7 +28,11 @@ public class Connection extends Thread {
 			System.exit(0);
 		}
 		super.start();
+<<<<<<< HEAD
 		((controleur.Controle)this.leRecepteur).setConnexion(this);
+=======
+		((controleur.Controle)this.leRecepteur).setConnection(this);
+>>>>>>> branch 'master' of https://github.com/gmanzola/TP-URBAN-MARGINAL.git
 	}
 
 	public void run() {
