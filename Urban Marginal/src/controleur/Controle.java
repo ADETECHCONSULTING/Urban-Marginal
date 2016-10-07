@@ -108,7 +108,8 @@ public class Controle implements Global {
 			frmArene.ajoutJoueur((JLabel)info);
 		}
 		if(ordre == "ajout phrase"){
-			frmArene.ajoutChat((String)info);
+			frmArene.ajoutChat(((String)info));
+			((JeuServeur)this.leJeu).envoi(connexion, frmArene.getTxtChat());
 		}
 	}
 	
@@ -117,7 +118,10 @@ public class Controle implements Global {
 			frmArene.ajoutPanelMur((JPanel)info);
 		}
 		if(ordre == "ajout joueur"){
-			frmArene.ajoutModifJoueur(((Label) info).getNumLabel(), ((Label)info).getjLabel());
+			frmArene.ajoutModifJoueur(((Label) info).getNumLabel(), ((Label) info).getjLabel());
+		}
+		if(ordre == "remplace chat"){
+			frmArene.remplaceChat((String)info);
 		}
 	}
 }

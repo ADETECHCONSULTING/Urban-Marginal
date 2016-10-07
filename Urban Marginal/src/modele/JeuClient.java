@@ -26,6 +26,9 @@ private Controle controle;
 		if(info instanceof Label){
 			controle.evenementModele(this, "ajout joueur", info);
 		}
+		if(info instanceof String){
+			controle.evenementModele(this, "remplace chat", info);
+		}
 	}
 
 	@Override

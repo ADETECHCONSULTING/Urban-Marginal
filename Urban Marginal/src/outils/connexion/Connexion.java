@@ -58,6 +58,7 @@ public class Connexion extends Thread {
 		try {
 			this.out.reset();
 			this.out.writeObject(unObjet);
+			this.out.reset();
 			this.out.flush();
 		} catch (IOException e) {
 			System.out.println("erreur sur l'objet out");

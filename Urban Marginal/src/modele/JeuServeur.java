@@ -19,17 +19,17 @@ public class JeuServeur extends Jeu implements Global {
 
 	@Override
 	public void reception(Connexion connexion, Object info) {
-		controle.evenementModele(this, "envoi panel murs", connexion);
 		String[] infos = ((String)info).split(SEPARE);
 		switch(Integer.parseInt(infos[0])){
 		case PSEUDO :
+			controle.evenementModele(this,"envoi panel murs", connexion);
 			for(Joueur unJoueur : lesJoueursDansLordre){
-				super.envoi(connexion, unJoueur.label);
+				super.envoi(connexion, unJoueur.getLabel());
 				super.envoi(connexion, unJoueur.getMessage());
 			}
-			lesJoueurs.get(connexion).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
-			lesJoueursDansLordre.add(this.lesJoueurs.get(connexion));
-			break;
+		    lesJoueurs.get(connexion).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
+		    this.lesJoueursDansLordre.add(this.lesJoueurs.get(connexion));
+		    break;
 		case CHAT : 
 			String laPhrase = lesJoueurs.get(connexion).getPseudo()+" > "+ infos[1];
 			controle.evenementModele(this, "ajout phrase", laPhrase);
