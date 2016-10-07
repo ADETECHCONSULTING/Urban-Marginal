@@ -30,7 +30,7 @@ public class Controle implements Global {
 	public Controle(){ // Controleur qui appelle EntreeJeu et affiche la fenetre
 		frmEntreeJeu = new EntreeJeu(this);
 		frmEntreeJeu.setVisible(true);
-		frmArene = new Arene("serveur", this);
+		frmArene = new Arene();
 	}
 	
 	public void evenementVue(JFrame uneFrame, Object info){
@@ -40,15 +40,8 @@ public class Controle implements Global {
 		if(uneFrame instanceof Choice){
 			evenementChoixJoueur(info);
 		}
-		if(uneFrame instanceof Arene){
-			evenementArene(info);
-		}
+		
 	}
-
-	private void evenementArene(Object info) {
-		((JeuClient)this.leJeu).envoi(info);		
-	}
-
 
 	private void evenementEntreeJeu(Object info) {
 		if((String)info == "serveur"){
@@ -63,7 +56,7 @@ public class Controle implements Global {
 			 if (new ClientSocket((String)info, PORT, this).isConnexionOk()){
 	                leJeu = new JeuClient(this);
 	                leJeu.setConnexion(connexion);
-	                frmArene = new Arene("client",this);
+	                frmArene = new Arene();
 	                frmEntreeJeu.dispose();
 	                frmChoixJoueur = new Choice(this);
 	                frmChoixJoueur.setVisible(true);
@@ -85,6 +78,7 @@ public class Controle implements Global {
 	}
 	
 	public void receptionInfo(Connexion connexion, Object info){
+		System.out.println("recepInfo");
 		leJeu.reception(connexion, info);
 	}
 	
@@ -106,10 +100,14 @@ public class Controle implements Global {
 		}
 		if(ordre == "ajout joueur"){
 			frmArene.ajoutJoueur((JLabel)info);
+<<<<<<< master
 		}
 		if(ordre == "ajout phrase"){
 			frmArene.ajoutChat(((String)info));
 			((JeuServeur)this.leJeu).envoi(connexion, frmArene.getTxtChat());
+=======
+			
+>>>>>>> f7892db Chat semi-fonctionnel
 		}
 	}
 	
