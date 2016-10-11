@@ -5,13 +5,15 @@ import java.util.Hashtable;
 
 import controleur.Controle;
 import controleur.Global;
-import outils.connexion.Connection;
+import outils.connexion.Connexion;
 
 public class JeuServeur extends Jeu implements Global {
 	
 	private ArrayList<Mur> lesMurs = new ArrayList<>();
-	private Hashtable<Connection, Joueur> lesJoueurs = new Hashtable<>() ;
+	private Hashtable<Connexion, Joueur> lesJoueurs = new Hashtable<>() ;
 	private ArrayList<Joueur> lesJoueursDansLordre = new ArrayList<>();
+	private String laPhrase;
+	
 
 	public JeuServeur(Controle controle) {
 		super.controle = controle;
@@ -28,15 +30,15 @@ public class JeuServeur extends Jeu implements Global {
 	}
 
 	@Override
-	public void setConnection(Connection connection) {
+	public void setConnection(Connexion connection) {
 		lesJoueurs.put(connection, new Joueur(this));
 		// envoi des murs creer en meme temps que l'enregistrement du joueur
 
 	}
 
 	@Override
-	public void reception(Connection connection, Object info) {
-		System.out.println(info);
+	public void reception(Connexion connection, Object info) {
+		
 		String[] infos;
 		infos = ((String)info).split(SEPARE);
 		
@@ -48,21 +50,26 @@ public class JeuServeur extends Jeu implements Global {
 			for(Joueur unJoueur : lesJoueursDansLordre){
 				super.envoi(connection, unJoueur.getLabel());
 				super.envoi(connection, unJoueur.getMessage());
+				super.envoi(connection, unJoueur.getBoule());
 			}
 		    lesJoueurs.get(connection).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
 		    this.lesJoueursDansLordre.add(this.lesJoueurs.get(connection));
+		    controle.evemenementModele(this, "ajout phrase", "*** "+lesJoueurs.get(connection).getPseudo()+" vient de se connecter ***");
 		    break;    
 		    
 		case CHAT :
 			
-			String laPhrase = lesJoueurs.get(connection).getPseudo() + " > " + infos[1];
+			laPhrase = lesJoueurs.get(connection).getPseudo() + " > " + infos[1];
 			controle.evemenementModele(this, "ajout phrase", laPhrase);
-			
+			break;
+		case ACTION:
+			lesJoueurs.get(connection).action(Integer.parseInt(infos[1]), lesJoueurs, lesMurs);
+			break;
 		}
 	}
 
 	@Override
-	public void deconnection(Connection connection) {
+	public void deconnection(Connexion connection) {
 		// TODO Auto-generated method stub
 
 	}
@@ -76,7 +83,7 @@ public class JeuServeur extends Jeu implements Global {
 	 */
 	
 	public void envoi(Object info) {
-		for(Connection unJoueur : lesJoueurs.keySet()){
+		for(Connexion unJoueur : lesJoueurs.keySet()){
 			super.envoi(unJoueur, info);
 		}
 	}

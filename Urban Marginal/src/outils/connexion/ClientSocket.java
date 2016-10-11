@@ -15,7 +15,7 @@ public class ClientSocket {
 			Socket socket = new Socket(ip, port);
 			System.out.println("La connexion au serveur a reussi");
 			this.connexionOk = true;
-			new Connection(socket, leRecepteur);
+			new Connexion(socket, leRecepteur);
 		} catch (UnknownHostException e) {
 			JOptionPane.showMessageDialog(null, "Serveur non disponible");
 			e.printStackTrace();

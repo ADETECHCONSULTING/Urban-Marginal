@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import controleur.Global;
-import outils.connexion.Connection;
+import outils.connexion.Connexion;
 
 public class Joueur extends Objet implements Global {
 
@@ -21,6 +21,7 @@ public class Joueur extends Objet implements Global {
 	private int vie;
 	private int etape;
 	private int orientation;
+	private Boule boule;
 
 	public Joueur(JeuServeur jeuServeur) {
 		this.jeuServeur = jeuServeur;
@@ -39,7 +40,7 @@ public class Joueur extends Objet implements Global {
 
 	}
 
-	public void initPerso(String pseudo, int numPerso, Hashtable<Connection, Joueur> lesJoueurs,
+	public void initPerso(String pseudo, int numPerso, Hashtable<Connexion, Joueur> lesJoueurs,
 			ArrayList<Mur> lesMurs) {
 
 		this.pseudo = pseudo;
@@ -57,6 +58,9 @@ public class Joueur extends Objet implements Global {
 		jeuServeur.nouveauLabelJeu(message);
 		premierePosition(lesJoueurs, lesMurs);
 		affiche(MARCHE, etape);
+		boule = new Boule(jeuServeur);
+		jeuServeur.envoi(boule.label);
+		
 	}
 
 	/**
@@ -66,7 +70,7 @@ public class Joueur extends Objet implements Global {
 		return message;
 	}
 
-	private boolean toucheJoueur(Hashtable<Connection, Joueur> lesJoueurs) {
+	private boolean toucheJoueur(Hashtable<Connexion, Joueur> lesJoueurs) {
 		for (Joueur unJoueur : lesJoueurs.values()) {
 			if (!unJoueur.equals(this)) {
 				if (super.toucheObjet(unJoueur)) {
@@ -87,7 +91,7 @@ public class Joueur extends Objet implements Global {
 		return false;
 	}
 
-	private void premierePosition(Hashtable<Connection, Joueur> lesJoueurs, ArrayList<Mur> lesMurs) {
+	private void premierePosition(Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs) {
 		label.getjLabel().setBounds(0, 0, L_PERSO, H_PERSO);
 		do {
 			super.posX = (int) Math.round(Math.random() * (L_ARENE - L_PERSO)); 
@@ -105,4 +109,71 @@ public class Joueur extends Objet implements Global {
 	public String getPseudo() {
 		return pseudo;
 	}
+	
+	public int deplace(int action, int position, int orientation, int lepas, int max, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs){
+		this.orientation = orientation;
+		int ancpos = position;
+		position += lepas;
+		if(position < 0){
+			position = 0;
+		}
+		if(position > max){
+			position = max;
+		}
+		if(action == 0 || action == 1){
+			super.posX = position;
+		}
+		else{
+			super.posY = position;
+		}
+		if(this.toucheMur(lesMurs) || this.toucheJoueur(lesJoueurs)){
+			position = ancpos;
+		}
+		etape++;
+		if(etape == NBETATSMARCHE){
+			etape = 1;
+		}
+		return position;
+	}
+	
+	public void action(int action, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs){
+		switch(action){
+		case GAUCHE :
+			posX = deplace(action, super.posX, GAUCHE, -LEPAS, L_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			break;
+		case DROITE:
+			posX = deplace(action, super.posX, DROITE, LEPAS, L_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			break;
+		case HAUT:
+			posY = deplace(action, super.posY, orientation, -LEPAS, H_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			break;
+		case BAS:
+			posY = deplace(action, super.posY, orientation, LEPAS, H_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			break;
+		case TIRE:
+			if(!boule.getLabel().getjLabel().isVisible()){
+			boule.tireBoule(this, lesMurs, lesJoueurs);
+			}
+			break;
+		}
+		affiche(MARCHE,etape);
+	}
+
+	/**
+	 * @return the boule
+	 */
+	public Boule getBoule() {
+		return boule;
+	}
+
+	/**
+	 * @return the orientation
+	 */
+	public int getOrientation() {
+		return orientation;
+	}
+	
+	
+	
+	
 }

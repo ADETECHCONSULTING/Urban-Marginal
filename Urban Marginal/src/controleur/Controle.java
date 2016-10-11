@@ -9,7 +9,7 @@ import modele.JeuClient;
 import modele.JeuServeur;
 import modele.Label;
 import outils.connexion.ClientSocket;
-import outils.connexion.Connection;
+import outils.connexion.Connexion;
 import outils.connexion.ServeurSocket;
 import vue.Arene;
 import vue.ChoixJoueur;
@@ -20,14 +20,14 @@ public class Controle implements Global {
 	private Jeu leJeu;
 	private Arene frmArene;
 	private ChoixJoueur frmChoixJoueur;
-	private Connection connection;
+	private Connexion connection;
 
 	public static void main(String[] args) {
 		new Controle();
 
 	}
 
-	public void setConnection(Connection connection) {
+	public void setConnection(Connexion connection) {
 		this.connection = connection;
 		if (leJeu instanceof JeuServeur) {
 			leJeu.setConnection(connection);
@@ -42,7 +42,7 @@ public class Controle implements Global {
 
 	// Gestion des evenements du modele
 
-	public void receptionInfo(Connection connection, Object info) {
+	public void receptionInfo(Connexion connection, Object info) {
 		this.leJeu.reception(connection, info);
 	}
 
@@ -107,6 +107,9 @@ public class Controle implements Global {
 		if (ordre == "ajout joueur") {
 			frmArene.ajoutModifJoueur(((Label) info).getNumLabel(), ((Label) info).getjLabel());
 		}
+		if(ordre == "remplace chat"){
+			frmArene.remplaceChat((String)info);
+		}
 	}
 
 	private void evenementJeuServeur(String ordre, Object info) {
@@ -114,13 +117,14 @@ public class Controle implements Global {
 			frmArene.ajoutMur((JLabel) info);
 		}
 		if (ordre == "envoi panel murs") {
-			((JeuServeur) this.leJeu).envoi((Connection) info, frmArene.getJpnMurs());
+			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnMurs());
 		}
 		if (ordre == "ajout joueur") {
 			frmArene.ajoutJoueur((JLabel) info);
 		}
 		if (ordre == "ajout phrase"){
 			frmArene.ajoutChat(((String)info));
+			((JeuServeur)this.leJeu).envoi(frmArene.getTxtChat());
 		}
 
 	}

@@ -28,7 +28,7 @@ public class ServeurSocket extends Thread {
 				System.out.println("le serveur attend..");
 				socket = serverSocket.accept();
 				System.out.println("Un client s'est connecté");
-				new Connection(socket, leRecepteur);
+				new Connexion(socket, leRecepteur);
 
 			} catch (IOException e) {
 				System.out.println("erreur lors de la création du socket : " + e);

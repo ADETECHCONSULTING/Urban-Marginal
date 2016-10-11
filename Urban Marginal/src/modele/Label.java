@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 public class Label implements Serializable{
 	
-	private static int nbLabel;
+	public static int nbLabel;
 	private int numLabel;
 	private JLabel jLabel;
 	

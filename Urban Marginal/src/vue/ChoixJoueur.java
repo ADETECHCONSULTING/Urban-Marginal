@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class ChoixJoueur extends JFrame implements Global {
 
@@ -42,7 +43,7 @@ public class ChoixJoueur extends JFrame implements Global {
 
 	private void lblGo_clic() {
 		if((txtPseudo.getText()).equals("")){
-			JOptionPane.showMessageDialog(null,"Le Pseudo est obligatoire");
+			JOptionPane.showMessageDialog(null,"Entrez un pseudo avant de pouvoir continuez...");
 			txtPseudo.requestFocus();
 		}
 		else{
@@ -158,7 +159,8 @@ public class ChoixJoueur extends JFrame implements Global {
 		txtPseudo.setColumns(10);
 
 		lblPersonnage = new JLabel("");
-		lblPersonnage.setBounds(155, 119, 96, 103);
+		lblPersonnage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPersonnage.setBounds(143, 116, 119, 116);
 		contentPane.add(lblPersonnage);
 
 		JLabel lblFond = new JLabel("");
@@ -167,7 +169,6 @@ public class ChoixJoueur extends JFrame implements Global {
 		contentPane.add(lblFond);
 
 		txtPseudo.requestFocus();
-		// Initialise numPerso a 1 ce qui affichera le perso numero 1
 		numPerso = 1;
 		affichePerso();
 	}
