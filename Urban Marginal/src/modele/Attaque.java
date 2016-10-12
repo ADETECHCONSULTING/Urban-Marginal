@@ -37,7 +37,7 @@ public class Attaque extends Thread implements Global {
 			jeuServeur.envoi(laboule.getLabel());
 			victime = toucheJoueur();
 		}while(laboule.getPosX() > 0 && laboule.getPosX() < L_ARENE && toucheMur() == false && victime == null );
-		
+		jeuServeur.envoi(HURT);
 		if(victime != null && victime.estMort() == false){
 			victime.perteVie();
 			attaquant.gainVie();
@@ -48,7 +48,9 @@ public class Attaque extends Thread implements Global {
 			if(victime.estMort()){
 				for(int i = 1; i < NBETATSMORT; i++){
 					victime.affiche(MORT, i);
+					jeuServeur.envoi(DEATH);
 					this.pause(200);
+					
 				}
 			}else{
 			victime.affiche(MARCHE, 1);

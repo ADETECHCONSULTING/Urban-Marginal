@@ -154,6 +154,7 @@ public class Joueur extends Objet implements Global {
 			break;
 		case TIRE:
 			if(!boule.getLabel().getjLabel().isVisible()){
+			jeuServeur.envoi(FIGHT);
 			boule.tireBoule(this, lesMurs, lesJoueurs);
 			}
 			break;

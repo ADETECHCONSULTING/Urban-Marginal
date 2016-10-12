@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleur.Controle;
 import controleur.Global;
+import outils.son.Son;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -29,7 +30,7 @@ public class Arene extends JFrame implements Global {
 	private JPanel jpnJeu;
 	private boolean client;
 	private Controle controle;
-
+	private Son[] lessons = new Son[SON.length];
 	/**
 	 * Create the frame.
 	 */
@@ -90,6 +91,13 @@ public class Arene extends JFrame implements Global {
 
 		txtChat = new JTextArea();
 		jspChat.setViewportView(txtChat);
+		
+		if(client){
+			(new Son (SONAMBIANCE)).playContinue();
+			for(int k=0;k<SON.length;k++){
+				lessons[k] = new Son(CHEMINSONS+SON[k]);
+			}
+		}
 	}
 
 	public void ajoutMur(JLabel objet) {
@@ -174,5 +182,9 @@ public class Arene extends JFrame implements Global {
 		if(valeur != -1){
 			controle.evenementVue(this, ACTION+SEPARE+valeur);
 		}
+	}
+	
+	public void joueSon(int numSon){
+		lessons[numSon].play();
 	}
 }

@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import controleur.Controle;
 import outils.connexion.Connexion;
+import outils.son.Son;
 
 public class JeuClient extends Jeu {
 	
@@ -34,6 +35,9 @@ public class JeuClient extends Jeu {
 		}
 		if(info instanceof String){
 			controle.evemenementModele(this, "remplace chat", info);
+		}
+		if(info instanceof Integer){
+			controle.evemenementModele(this, "son", info);
 		}
 
 	}

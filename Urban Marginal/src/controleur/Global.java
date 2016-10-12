@@ -51,6 +51,11 @@ public interface Global {
 	public static final String SONGO = CHEMINSONS + "go.wav";
 	public static final String SONWELCOME = CHEMINSONS + "welcome.wav";
 	public static final String SONAMBIANCE = CHEMINSONS + "ambiance.wav";
-
+	public static final int FIGHT = 0;
+	public static final int HURT = 1;
+	public static final int DEATH = 2;
+	public static final String[] SON = {"fight.wav", "hurt.wav", "death.wav"};
+	
+	
 
 }
