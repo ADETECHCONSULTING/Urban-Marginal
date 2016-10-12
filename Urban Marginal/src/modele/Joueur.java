@@ -22,10 +22,13 @@ public class Joueur extends Objet implements Global {
 	private int etape;
 	private int orientation;
 	private Boule boule;
+	private static final int MAXVIE = 10;
+	private static final int GAIN = 1;
+	private static final int PERTE = 2;
 
 	public Joueur(JeuServeur jeuServeur) {
 		this.jeuServeur = jeuServeur;
-		vie = 10;
+		vie = MAXVIE;
 		etape = 1; // numéro d'étape dans l'animation
 		orientation = DROITE;
 	}
@@ -172,7 +175,15 @@ public class Joueur extends Objet implements Global {
 		return orientation;
 	}
 	
+	public void gainVie(){
+		vie += GAIN;
+	}
 	
-	
+	public void perteVie(){
+		vie -= PERTE;
+		if(vie < 0){
+			vie = 0;
+		}
+	}
 	
 }
