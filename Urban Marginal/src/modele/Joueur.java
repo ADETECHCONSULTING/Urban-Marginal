@@ -40,8 +40,7 @@ public class Joueur extends Objet implements Global {
 
 	}
 
-	public void initPerso(String pseudo, int numPerso, Hashtable<Connexion, Joueur> lesJoueurs,
-			ArrayList<Mur> lesMurs) {
+	public void initPerso(String pseudo, int numPerso, Hashtable<Connexion, Joueur> lesJoueurs,ArrayList<Mur> lesMurs) {
 
 		this.pseudo = pseudo;
 		this.numPerso = numPerso;
@@ -95,10 +94,10 @@ public class Joueur extends Objet implements Global {
 		label.getjLabel().setBounds(0, 0, L_PERSO, H_PERSO);
 		do {
 			super.posX = (int) Math.round(Math.random() * (L_ARENE - L_PERSO)); 
-			// on enleve les dimensions du perso pour ne pas qu'il sorte de l'arene
+			
 																				
 			super.posY = (int) Math.round(Math.random() * (H_ARENE - H_PERSO - H_MESSAGE)); 
-			// on enleve la hauteur du message sous le perso
+			
 			
 		} while (toucheJoueur(lesJoueurs) || toucheMur(lesMurs));
 	}

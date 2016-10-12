@@ -32,17 +32,24 @@ public class Attaque extends Thread implements Global {
 				laboule.setPosX(laboule.getPosX()+LEPAS);
 			}
 			laboule.label.getjLabel().setBounds(laboule.getPosX(), laboule.getPosY(), L_BOULE, H_BOULE);
-			this.pause(10, 15);
-			jeuServeur.envoi(laboule.label);
+			this.pause(10);
+			jeuServeur.envoi(laboule.getLabel());
 			victime = toucheJoueur();
 		}while(laboule.getPosX() > 0 && laboule.getPosX() < L_ARENE && toucheMur() == false && victime == null );
+		if(victime != null){
+			for(int i=1; i < NBETATSBLESSE; i++){
+				victime.affiche(BLESSE, i);
+				this.pause(120);
+			}
+			victime.affiche(MARCHE, 1);
+		}
 		laboule.getLabel().getjLabel().setVisible(false);
-		jeuServeur.envoi(laboule.label);
+		jeuServeur.envoi(laboule.getLabel());
 	}
 	
-	public void pause(long milli, int nano){
+	public void pause(long milli){
 		try {
-			Thread.sleep(milli, nano);
+			Thread.sleep(milli);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

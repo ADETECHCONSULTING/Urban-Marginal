@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -50,7 +51,7 @@ public class JeuServeur extends Jeu implements Global {
 			for(Joueur unJoueur : lesJoueursDansLordre){
 				super.envoi(connection, unJoueur.getLabel());
 				super.envoi(connection, unJoueur.getMessage());
-				super.envoi(connection, unJoueur.getBoule());
+				super.envoi(connection, unJoueur.getBoule().getLabel());
 			}
 		    lesJoueurs.get(connection).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
 		    this.lesJoueursDansLordre.add(this.lesJoueurs.get(connection));
@@ -75,7 +76,7 @@ public class JeuServeur extends Jeu implements Global {
 	}
 	
 	public void nouveauLabelJeu(Label label){
-		controle.evemenementModele(this, "ajout joueur", label.getjLabel());
+		controle.evemenementModele(this, "ajout joueur", label);
 	}
 
 	/* (non-Javadoc)

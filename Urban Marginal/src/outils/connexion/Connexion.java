@@ -57,6 +57,7 @@ public class Connexion extends Thread {
 
 	public synchronized void envoi(Object unObjet) {
 		try {
+			// System.out.println(unObjet);
 			this.out.reset();
 			out.writeObject(unObjet);
 			this.out.reset();

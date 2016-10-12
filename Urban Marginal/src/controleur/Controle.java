@@ -120,7 +120,7 @@ public class Controle implements Global {
 			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnMurs());
 		}
 		if (ordre == "ajout joueur") {
-			frmArene.ajoutJoueur((JLabel) info);
+			frmArene.ajoutJoueur(((Label) info).getjLabel());
 		}
 		if (ordre == "ajout phrase"){
 			frmArene.ajoutChat(((String)info));

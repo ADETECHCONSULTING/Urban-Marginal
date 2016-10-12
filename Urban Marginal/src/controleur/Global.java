@@ -43,6 +43,10 @@ public interface Global {
 	public static final int H_BOULE = 17;
 	public static final String CHEMINBOULES = CHEMIN + "boules" + SEPARATOR;
 	public static final String BOULE = CHEMINBOULES + "boule.gif";
+	public static final int NBETATSBLESSE = 2;
+	public static final int NBETATSMORT = 2;
+
+	
 	
 	
 	
