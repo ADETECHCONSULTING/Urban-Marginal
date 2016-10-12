@@ -38,14 +38,21 @@ public class Attaque extends Thread implements Global {
 			victime = toucheJoueur();
 		}while(laboule.getPosX() > 0 && laboule.getPosX() < L_ARENE && toucheMur() == false && victime == null );
 		
-		if(victime != null){
+		if(victime != null && victime.estMort() == false){
 			victime.perteVie();
 			attaquant.gainVie();
 			for(int i=1; i < NBETATSBLESSE; i++){
 				victime.affiche(BLESSE, i);
 				this.pause(120);
 			}
+			if(victime.estMort()){
+				for(int i = 1; i < NBETATSMORT; i++){
+					victime.affiche(MORT, i);
+					this.pause(200);
+				}
+			}else{
 			victime.affiche(MARCHE, 1);
+			}
 			attaquant.affiche(MARCHE, 1);
 		}
 		laboule.getLabel().getjLabel().setVisible(false);

@@ -64,15 +64,17 @@ public class JeuServeur extends Jeu implements Global {
 			controle.evemenementModele(this, "ajout phrase", laPhrase);
 			break;
 		case ACTION:
+			if(!lesJoueurs.get(connection).estMort()){
 			lesJoueurs.get(connection).action(Integer.parseInt(infos[1]), lesJoueurs, lesMurs);
+			}
 			break;
 		}
 	}
 
 	@Override
 	public void deconnection(Connexion connection) {
-		// TODO Auto-generated method stub
-
+		lesJoueurs.get(connection).departJoueur();
+		lesJoueurs.remove(connection);
 	}
 	
 	public void nouveauLabelJeu(Label label){

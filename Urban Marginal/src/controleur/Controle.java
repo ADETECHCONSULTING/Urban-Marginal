@@ -128,4 +128,17 @@ public class Controle implements Global {
 		}
 
 	}
+	
+	public void deconnexion(Connexion connexion){
+		leJeu.deconnection(connexion);
+	}
+
+	/**
+	 * @return the leJeu
+	 */
+	public Jeu getLeJeu() {
+		return leJeu;
+	}
+	
+	
 }

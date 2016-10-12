@@ -4,6 +4,7 @@ import java.awt.Cursor;
 
 import controleur.Controle;
 import controleur.Global;
+import outils.son.Son;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,8 +25,13 @@ public class ChoixJoueur extends JFrame implements Global {
 	private Integer numPerso;
 	private JLabel lblPersonnage;
 	private Controle controle;
+	private Son precedent;
+	private Son suivant;
+	private Son go;
+	private Son welcome;
 
 	private void lblPrecedent_clic() {
+		this.precedent.play();
 		numPerso--;
 		if(numPerso == 0){
 			numPerso = NBPERSOS;
@@ -34,6 +40,7 @@ public class ChoixJoueur extends JFrame implements Global {
 	}
 
 	private void lblSuivant_clic() {
+		this.suivant.play();
 		if(numPerso == 3){
 			numPerso = 0;
 		}
@@ -42,11 +49,13 @@ public class ChoixJoueur extends JFrame implements Global {
 	}
 
 	private void lblGo_clic() {
+		
 		if((txtPseudo.getText()).equals("")){
 			JOptionPane.showMessageDialog(null,"Entrez un pseudo avant de pouvoir continuez...");
 			txtPseudo.requestFocus();
 		}
 		else{
+			this.go.play();
 			controle.evenementVue(this, PSEUDO+SEPARE+txtPseudo.getText()+SEPARE+numPerso);
 		}
 		
@@ -171,6 +180,12 @@ public class ChoixJoueur extends JFrame implements Global {
 		txtPseudo.requestFocus();
 		numPerso = 1;
 		affichePerso();
+		
+		this.precedent = new Son(SONPRECEDENT);
+		this.suivant = new Son(SONSUIVANT);
+		this.go = new Son(SONGO);
+		this.welcome = new Son(SONWELCOME);
+		this.welcome.play();
 	}
 
 }

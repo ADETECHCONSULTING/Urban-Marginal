@@ -186,4 +186,22 @@ public class Joueur extends Objet implements Global {
 		}
 	}
 	
+	public boolean estMort(){
+		if(vie == 0){
+			return true;
+		}
+		return false;
+	}
+	
+	public void departJoueur(){
+		if(this.label != null){
+		this.message.getjLabel().setVisible(false);
+		super.label.getjLabel().setVisible(false);
+		this.boule.getLabel().getjLabel().setVisible(false);
+		jeuServeur.envoi(message);
+		jeuServeur.envoi(label);
+		jeuServeur.envoi(boule);
+		}
+		}
+	
 }
