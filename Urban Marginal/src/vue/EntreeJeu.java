@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.swing.JTextField;
 
 public class EntreeJeu extends JFrame {
@@ -19,13 +22,14 @@ public class EntreeJeu extends JFrame {
 	private JPanel contentPane;
 	private Controle controle;
 	private JTextField txtIp;
-
+	private String ip;
 	/**
 	 * Launch the application.
 	 */
 
 	private void btnStart_clic() {
 		controle.evenementVue(this, "serveur");
+		System.out.println(ip);
 	}
 
 	private void btnExit_clic() {
@@ -35,7 +39,6 @@ public class EntreeJeu extends JFrame {
 
 	private void btnConnect_clic() {
 		controle.evenementVue(this, txtIp.getText());
-
 	}
 
 	/**
@@ -111,7 +114,13 @@ public class EntreeJeu extends JFrame {
 		txtIp.setBounds(127, 129, 86, 20);
 		contentPane.add(txtIp);
 		txtIp.setColumns(10);
-
+		
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("pas d'adresse IP ? "+ e1);
+		}
 		this.controle = controle;
 	}
 }
