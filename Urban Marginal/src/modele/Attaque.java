@@ -41,7 +41,7 @@ public class Attaque extends Thread implements Global {
 		if(victime != null && victime.estMort() == false){
 			victime.perteVie();
 			attaquant.gainVie();
-			for(int i=1; i < NBETATSBLESSE; i++){
+			for(int i=1; i <= NBETATSBLESSE; i++){
 				victime.affiche(BLESSE, i);
 				this.pause(120);
 			}
@@ -49,9 +49,17 @@ public class Attaque extends Thread implements Global {
 				for(int i = 1; i < NBETATSMORT; i++){
 					victime.affiche(MORT, i);
 					jeuServeur.envoi(DEATH);
-					this.pause(200);
-					
+					this.pause(200);	
 				}
+				this.pause(3000);
+				jeuServeur.envoi(DEATH);
+				for(int i = 2; i > 0; i--){
+					victime.affiche(MORT, i);
+					jeuServeur.envoi(DEATH);
+					this.pause(200);
+				}
+				victime.affiche(MARCHE, 1);
+				victime.ressucite();
 			}else{
 			victime.affiche(MARCHE, 1);
 			}

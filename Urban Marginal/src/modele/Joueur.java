@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 import controleur.Global;
 import outils.connexion.Connexion;
+import vue.Arene;
 
 public class Joueur extends Objet implements Global {
 
@@ -20,6 +21,7 @@ public class Joueur extends Objet implements Global {
 	private JeuServeur jeuServeur;
 	private int vie;
 	private int etape;
+	private Arene frmArene;
 	private int orientation;
 	private Boule boule;
 	private static final int MAXVIE = 10;
@@ -44,7 +46,6 @@ public class Joueur extends Objet implements Global {
 	}
 
 	public void initPerso(String pseudo, int numPerso, Hashtable<Connexion, Joueur> lesJoueurs,ArrayList<Mur> lesMurs) {
-
 		this.pseudo = pseudo;
 		this.numPerso = numPerso;
 		label = new Label(Label.getNbLabel(), new JLabel());
@@ -92,6 +93,17 @@ public class Joueur extends Objet implements Global {
 		}
 		return false;
 	}
+	
+	private boolean toucheBonus(ArrayList<Bonus> lesBonus){
+		for(Bonus unBonus : lesBonus){
+			if(super.toucheObjet(unBonus)){
+				System.out.println("Touche");
+				return true;
+			}
+		}
+		System.out.println("Touche pas");
+		return false;
+	}
 
 	private void premierePosition(Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs) {
 		label.getjLabel().setBounds(0, 0, L_PERSO, H_PERSO);
@@ -112,7 +124,7 @@ public class Joueur extends Objet implements Global {
 		return pseudo;
 	}
 	
-	public int deplace(int action, int position, int orientation, int lepas, int max, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs){
+	public int deplace(int action, int position, int orientation, int lepas, int max, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs,  ArrayList<Bonus> lesBonus){
 		this.orientation = orientation;
 		int ancpos = position;
 		position += lepas;
@@ -131,6 +143,9 @@ public class Joueur extends Objet implements Global {
 		if(this.toucheMur(lesMurs) || this.toucheJoueur(lesJoueurs)){
 			position = ancpos;
 		}
+		if(this.toucheBonus(lesBonus)){
+			this.BonusActivation(lesBonus);
+		}
 		etape++;
 		if(etape == NBETATSMARCHE){
 			etape = 1;
@@ -138,19 +153,25 @@ public class Joueur extends Objet implements Global {
 		return position;
 	}
 	
-	public void action(int action, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs){
+	public void BonusActivation(ArrayList<Bonus>lesBonus){
+		if(this.toucheBonus(lesBonus)){
+			lesBonus.get(0).activationBonus(this);
+			lesBonus.remove(0);
+		}
+	}
+	public void action(int action, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs, ArrayList<Bonus> lesBonus){
 		switch(action){
 		case GAUCHE :
-			posX = deplace(action, super.posX, GAUCHE, -LEPAS, L_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			posX = deplace(action, super.posX, GAUCHE, -LEPAS, L_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs, lesBonus);
 			break;
 		case DROITE:
-			posX = deplace(action, super.posX, DROITE, LEPAS, L_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			posX = deplace(action, super.posX, DROITE, LEPAS, L_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs, lesBonus);
 			break;
 		case HAUT:
-			posY = deplace(action, super.posY, orientation, -LEPAS, H_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			posY = deplace(action, super.posY, orientation, -LEPAS, H_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs, lesBonus);
 			break;
 		case BAS:
-			posY = deplace(action, super.posY, orientation, LEPAS, H_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs);
+			posY = deplace(action, super.posY, orientation, LEPAS, H_ARENE-(H_PERSO+H_MESSAGE),lesJoueurs, lesMurs, lesBonus);
 			break;
 		case TIRE:
 			if(!boule.getLabel().getjLabel().isVisible()){
@@ -180,11 +201,18 @@ public class Joueur extends Objet implements Global {
 		vie += GAIN;
 	}
 	
+	public void ressucite(){
+		vie = 10;
+	}
 	public void perteVie(){
 		vie -= PERTE;
 		if(vie < 0){
 			vie = 0;
 		}
+	}
+	
+	public void setGainVie(int gain){
+		vie += gain;
 	}
 	
 	public boolean estMort(){
@@ -194,6 +222,8 @@ public class Joueur extends Objet implements Global {
 		return false;
 	}
 	
+	
+
 	public void departJoueur(){
 		if(this.label != null){
 		this.message.getjLabel().setVisible(false);
@@ -201,7 +231,7 @@ public class Joueur extends Objet implements Global {
 		this.boule.getLabel().getjLabel().setVisible(false);
 		jeuServeur.envoi(message);
 		jeuServeur.envoi(label);
-		jeuServeur.envoi(boule);
+		jeuServeur.envoi(boule.getLabel());
 		}
 		}
 	

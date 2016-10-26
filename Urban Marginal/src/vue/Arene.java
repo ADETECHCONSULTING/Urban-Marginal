@@ -27,6 +27,7 @@ public class Arene extends JFrame implements Global {
 	private JTextField txtSaisie;
 	private JTextArea txtChat;
 	private JPanel jpnMurs;
+	private JPanel jpnBonus;
 	private JPanel jpnJeu;
 	private boolean client;
 	private Controle controle;
@@ -64,7 +65,13 @@ public class Arene extends JFrame implements Global {
 		jpnMurs.setOpaque(false);
 		contentPane.add(jpnMurs);
 		jpnMurs.setLayout(null);
-
+		
+		jpnBonus = new JPanel();
+		jpnBonus.setBounds(0, 0, L_ARENE, H_ARENE);
+		jpnBonus.setOpaque(false);
+		contentPane.add(jpnBonus);
+		jpnBonus.setLayout(null);
+		
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, L_ARENE, H_ARENE);
 		lblFond.setIcon(new ImageIcon(FONDARENE));
@@ -103,14 +110,21 @@ public class Arene extends JFrame implements Global {
 	public void ajoutMur(JLabel objet) {
 		jpnMurs.add(objet);
 		jpnMurs.repaint();
-
+	}
+	
+	public void ajoutBonus(JLabel objet){
+		try{
+			this.jpnBonus.remove(0);
+		} catch (ArrayIndexOutOfBoundsException e) {
+		}
+		this.jpnBonus.add(objet);
+		this.jpnBonus.repaint();
 	}
 
 	public void ajoutPanelMurs(JPanel objet) {
 		jpnMurs.add(objet);
 		jpnMurs.repaint();
 		contentPane.requestFocus();
-
 	}
 
 	public JPanel getJpnMurs() {
@@ -124,11 +138,9 @@ public class Arene extends JFrame implements Global {
 	}
 
 	public void ajoutModifJoueur(int num, JLabel unLabel) {
-
 		try {
 			this.jpnJeu.remove(num);
 		} catch (ArrayIndexOutOfBoundsException e) {
-
 		}
 		this.jpnJeu.add(unLabel, num);
 		this.jpnJeu.repaint();

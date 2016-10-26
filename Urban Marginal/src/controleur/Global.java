@@ -56,7 +56,11 @@ public interface Global {
 	public static final int HURT = 1;
 	public static final int DEATH = 2;
 	public static final String[] SON = {"fight.wav", "hurt.wav", "death.wav"};
-	
-	
-
+	public static final int H_BONUS = 35;
+	public static final int L_BONUS = 34;
+	public static final String CHEMINBONUS = CHEMIN + "bonus" + SEPARATOR;
+	public static final String BONUSVIE = CHEMINBONUS + "coeur.png";
+	public static final String MALUSBLOC = CHEMINBONUS + "blocage.jpg";
+	public static final int NBBONUS = 1;
+	public static final int BONUS = 3;
 }

@@ -76,6 +76,7 @@ public class Controle implements Global {
 			frmEntreeJeu.dispose();
 			frmArene = new Arene("serveur", this);
 			((JeuServeur) this.leJeu).constructionMurs();
+			((JeuServeur) this.leJeu).afficheBonus();
 			frmArene.setVisible(true);
 		} else {
 			if ((new ClientSocket((String) info, PORT, this)).isConnexionOk()) {
@@ -128,6 +129,9 @@ public class Controle implements Global {
 		if (ordre == "ajout phrase"){
 			frmArene.ajoutChat(((String)info));
 			((JeuServeur)this.leJeu).envoi(frmArene.getTxtChat());
+		}
+		if(ordre == "ajout bonus"){
+			frmArene.ajoutBonus(((Label)info).getjLabel());
 		}
 
 	}
