@@ -20,9 +20,6 @@ public abstract class Bonus extends Objet implements Global {
 		label.getjLabel().setHorizontalAlignment(SwingConstants.CENTER);
 		label.getjLabel().setVerticalAlignment(SwingConstants.CENTER);
 		label.getjLabel().setBounds(posX, posY, L_BONUS, H_BONUS);
-		
-		BonusApparition bonusApp = new BonusApparition();
-		bonusApp.start();
 	}
 	
 	public abstract void activationBonus(Joueur joueur);

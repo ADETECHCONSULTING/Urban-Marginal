@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controleur.Controle;
 import controleur.Global;
 import outils.connexion.Connexion;
 import vue.Arene;
@@ -24,6 +25,7 @@ public class Joueur extends Objet implements Global {
 	private Arene frmArene;
 	private int orientation;
 	private Boule boule;
+	private Controle controle;
 	private static final int MAXVIE = 10;
 	private static final int GAIN = 1;
 	private static final int PERTE = 2;
@@ -33,6 +35,7 @@ public class Joueur extends Objet implements Global {
 		vie = MAXVIE;
 		etape = 1; // numéro d'étape dans l'animation
 		orientation = DROITE;
+		frmArene = new Arene("client", controle);
 	}
 
 	public void affiche(String etat, int etape) {
@@ -97,11 +100,9 @@ public class Joueur extends Objet implements Global {
 	private boolean toucheBonus(ArrayList<Bonus> lesBonus){
 		for(Bonus unBonus : lesBonus){
 			if(super.toucheObjet(unBonus)){
-				System.out.println("Touche");
 				return true;
 			}
 		}
-		System.out.println("Touche pas");
 		return false;
 	}
 
@@ -157,6 +158,7 @@ public class Joueur extends Objet implements Global {
 		if(this.toucheBonus(lesBonus)){
 			lesBonus.get(0).activationBonus(this);
 			lesBonus.remove(0);
+			jeuServeur.afficheBonus();
 		}
 	}
 	public void action(int action, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs, ArrayList<Bonus> lesBonus){

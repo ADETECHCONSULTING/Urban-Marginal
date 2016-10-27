@@ -29,6 +29,7 @@ public class JeuClient extends Jeu {
 	public void reception(Connexion connection, Object info) {
 		if(info instanceof JPanel){
 			controle.evemenementModele(this,"ajout panel murs", info);
+			//controle.evemenementModele(this, "ajout panel bonus", info);
 		}
 		if(info instanceof Label){
 			controle.evemenementModele(this, "ajout joueur", info);
@@ -38,6 +39,9 @@ public class JeuClient extends Jeu {
 		}
 		if(info instanceof Integer){
 			controle.evemenementModele(this, "son", info);
+		}
+		if(info instanceof JLabel){
+			controle.evemenementModele(this, "ajout bonus", info);
 		}
 
 	}

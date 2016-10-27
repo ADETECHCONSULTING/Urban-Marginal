@@ -113,14 +113,27 @@ public class Arene extends JFrame implements Global {
 	}
 	
 	public void ajoutBonus(JLabel objet){
+		if(jpnBonus.getComponentCount() > 0){
+		try{
+			this.jpnBonus.remove(0);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Array out of bound" + e);
+		}
+		}
+		this.jpnBonus.add(objet);
+		this.jpnBonus.repaint();
+	}
+
+	public void ajoutPanelBonus(JPanel objet){
 		try{
 			this.jpnBonus.remove(0);
 		} catch (ArrayIndexOutOfBoundsException e) {
 		}
 		this.jpnBonus.add(objet);
 		this.jpnBonus.repaint();
+		contentPane.requestFocus();
 	}
-
+	
 	public void ajoutPanelMurs(JPanel objet) {
 		jpnMurs.add(objet);
 		jpnMurs.repaint();
@@ -129,6 +142,10 @@ public class Arene extends JFrame implements Global {
 
 	public JPanel getJpnMurs() {
 		return jpnMurs;
+	}
+	
+	public JPanel getJpnBonus(){
+		return jpnBonus;
 	}
 
 	public void ajoutJoueur(JLabel unJoueur) {

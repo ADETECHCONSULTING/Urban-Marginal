@@ -24,7 +24,6 @@ public class BonusVie extends Bonus implements Global{
 	public void affiche(ArrayList<Bonus> lesBonus) { 
 		label.getjLabel().setBounds(posX, posY, L_BONUS, H_BONUS);
 		label.getjLabel().setIcon(new ImageIcon(BONUSVIE));
-		jeuServeur.envoi(label);
 		controle.evemenementModele(this, "ajout bonus", lesBonus.get(0).getLabel());
 	}
 }

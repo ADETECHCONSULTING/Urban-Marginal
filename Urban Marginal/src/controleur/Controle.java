@@ -114,6 +114,9 @@ public class Controle implements Global {
 		if(ordre == "son"){
 			frmArene.joueSon((Integer)info);
 		}
+		if(ordre == "ajout panel bonus"){
+			frmArene.ajoutPanelBonus(((JPanel)info));
+		}
 	}
 
 	private void evenementJeuServeur(String ordre, Object info) {
@@ -122,6 +125,9 @@ public class Controle implements Global {
 		}
 		if (ordre == "envoi panel murs") {
 			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnMurs());
+		}
+		if(ordre == "envoi panel bonus"){
+			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnBonus());
 		}
 		if (ordre == "ajout joueur") {
 			frmArene.ajoutJoueur(((Label) info).getjLabel());
