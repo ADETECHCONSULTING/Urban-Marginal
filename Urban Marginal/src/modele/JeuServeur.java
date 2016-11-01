@@ -54,6 +54,7 @@ public class JeuServeur extends Jeu implements Global {
 	@Override
 	public void setConnection(Connexion connection) {
 		lesJoueurs.put(connection, new Joueur(this));
+		controle.evemenementModele(this, "ajout panel bonus", connection);
 		// envoi des murs creer en meme temps que l'enregistrement du joueur
 
 	}
@@ -74,6 +75,8 @@ public class JeuServeur extends Jeu implements Global {
 				super.envoi(connection, unJoueur.getLabel());
 				super.envoi(connection, unJoueur.getMessage());
 				super.envoi(connection, unJoueur.getBoule().getLabel());
+				super.envoi(connection, unJoueur.getBonus().getLabel());
+				
 			}
 		    lesJoueurs.get(connection).initPerso(infos[1], Integer.parseInt(infos[2]), lesJoueurs, lesMurs);
 		    this.lesJoueursDansLordre.add(this.lesJoueurs.get(connection));
@@ -114,10 +117,7 @@ public class JeuServeur extends Jeu implements Global {
 		}
 	}
 	
-	public void resetBonus(Label info){
-		frmArene.ajoutBonus(info.getjLabel());
-		controle.evemenementModele(this, "ajout bonus", info);
-	}
+	
 	
 	public boolean getRandomBolean(){
 		Random random = new Random();

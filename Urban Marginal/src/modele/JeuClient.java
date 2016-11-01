@@ -41,7 +41,7 @@ public class JeuClient extends Jeu {
 			controle.evemenementModele(this, "son", info);
 		}
 		if(info instanceof JLabel){
-			controle.evemenementModele(this, "ajout bonus", info);
+			controle.evemenementModele(this, "ajout jlabel bonus", info);
 		}
 
 	}

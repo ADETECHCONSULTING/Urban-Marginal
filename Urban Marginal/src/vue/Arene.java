@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleur.Controle;
 import controleur.Global;
+import modele.JeuServeur;
 import outils.son.Son;
 
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ public class Arene extends JFrame implements Global {
 	private JTextArea txtChat;
 	private JPanel jpnMurs;
 	private JPanel jpnBonus;
+	private JeuServeur jeuServeur;
 	private JPanel jpnJeu;
 	private boolean client;
 	private Controle controle;
@@ -132,7 +134,8 @@ public class Arene extends JFrame implements Global {
 		this.jpnBonus.add(objet);
 		this.jpnBonus.repaint();
 		contentPane.requestFocus();
-	}
+		
+		}
 	
 	public void ajoutPanelMurs(JPanel objet) {
 		jpnMurs.add(objet);
@@ -147,7 +150,7 @@ public class Arene extends JFrame implements Global {
 	public JPanel getJpnBonus(){
 		return jpnBonus;
 	}
-
+	
 	public void ajoutJoueur(JLabel unJoueur) {
 		jpnJeu.add(unJoueur);
 		jpnJeu.repaint();

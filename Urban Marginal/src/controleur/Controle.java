@@ -91,6 +91,8 @@ public class Controle implements Global {
 
 	}
 
+	
+	
 	public void evemenementModele(Object unJeu, String ordre, Object info) {
 		if (unJeu instanceof JeuServeur) {
 			evenementJeuServeur(ordre, info);
@@ -114,8 +116,8 @@ public class Controle implements Global {
 		if(ordre == "son"){
 			frmArene.joueSon((Integer)info);
 		}
-		if(ordre == "ajout panel bonus"){
-			frmArene.ajoutPanelBonus(((JPanel)info));
+		if(ordre == "ajout jpanel bonus"){
+			frmArene.ajoutBonus((JLabel)info);
 		}
 	}
 
@@ -125,6 +127,10 @@ public class Controle implements Global {
 		}
 		if (ordre == "envoi panel murs") {
 			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnMurs());
+		}
+		if(ordre == "ajout bonus"){
+			frmArene.ajoutBonus(((Label)info).getjLabel());
+			
 		}
 		if(ordre == "envoi panel bonus"){
 			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnBonus());
@@ -136,9 +142,8 @@ public class Controle implements Global {
 			frmArene.ajoutChat(((String)info));
 			((JeuServeur)this.leJeu).envoi(frmArene.getTxtChat());
 		}
-		if(ordre == "ajout bonus"){
-			frmArene.ajoutBonus(((Label)info).getjLabel());
-		}
+		
+		
 
 	}
 	

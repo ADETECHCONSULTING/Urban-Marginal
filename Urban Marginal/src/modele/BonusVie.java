@@ -17,7 +17,7 @@ public class BonusVie extends Bonus implements Global{
 	
 	@Override
 	public void activationBonus(Joueur joueur) {
-		joueur.setGainVie(6); //donne au joueur 6 points de vie supplémentaires 
+		joueur.setGainVie(3); //donne au joueur 3 points de vie supplémentaires 
 	}
 
 	@Override

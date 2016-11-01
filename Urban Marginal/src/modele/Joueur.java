@@ -25,6 +25,7 @@ public class Joueur extends Objet implements Global {
 	private Arene frmArene;
 	private int orientation;
 	private Boule boule;
+	private Bonus bonus;
 	private Controle controle;
 	private static final int MAXVIE = 10;
 	private static final int GAIN = 1;
@@ -155,11 +156,10 @@ public class Joueur extends Objet implements Global {
 	}
 	
 	public void BonusActivation(ArrayList<Bonus>lesBonus){
-		if(this.toucheBonus(lesBonus)){
 			lesBonus.get(0).activationBonus(this);
 			lesBonus.remove(0);
 			jeuServeur.afficheBonus();
-		}
+		
 	}
 	public void action(int action, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs, ArrayList<Bonus> lesBonus){
 		switch(action){
@@ -190,6 +190,10 @@ public class Joueur extends Objet implements Global {
 	 */
 	public Boule getBoule() {
 		return boule;
+	}
+	
+	public Bonus getBonus(){
+		return bonus;
 	}
 
 	/**
