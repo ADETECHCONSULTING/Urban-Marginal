@@ -36,7 +36,7 @@ public class ChoixJoueur extends JFrame implements Global {
 		if(numPerso == 0){
 			numPerso = NBPERSOS;
 		}
-			affichePerso();
+		affichePerso();
 	}
 
 	private void lblSuivant_clic() {
@@ -44,12 +44,12 @@ public class ChoixJoueur extends JFrame implements Global {
 		if(numPerso == 3){
 			numPerso = 0;
 		}
-			numPerso++;
-			affichePerso();
+		numPerso++;
+		affichePerso();
 	}
 
 	private void lblGo_clic() {
-		
+
 		if((txtPseudo.getText()).equals("")){
 			JOptionPane.showMessageDialog(null,"Entrez un pseudo avant de pouvoir continuez...");
 			txtPseudo.requestFocus();
@@ -58,7 +58,7 @@ public class ChoixJoueur extends JFrame implements Global {
 			this.go.play();
 			controle.evenementVue(this, PSEUDO+SEPARE+txtPseudo.getText()+SEPARE+numPerso);
 		}
-		
+
 	}
 
 	private void souris_normale() {
@@ -180,7 +180,7 @@ public class ChoixJoueur extends JFrame implements Global {
 		txtPseudo.requestFocus();
 		numPerso = 1;
 		affichePerso();
-		
+
 		this.precedent = new Son(SONPRECEDENT);
 		this.suivant = new Son(SONSUIVANT);
 		this.go = new Son(SONGO);

@@ -49,12 +49,12 @@ public class Arene extends JFrame implements Global {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		if(client){
-		contentPane.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				contentPane_keyPressed(arg0);
-			}
-		});
+			contentPane.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+					contentPane_keyPressed(arg0);
+				}
+			});
 		}
 		jpnJeu = new JPanel();
 		jpnJeu.setBounds(0, 0, L_ARENE, H_ARENE);
@@ -67,13 +67,13 @@ public class Arene extends JFrame implements Global {
 		jpnMurs.setOpaque(false);
 		contentPane.add(jpnMurs);
 		jpnMurs.setLayout(null);
-		
+
 		jpnBonus = new JPanel();
 		jpnBonus.setBounds(0, 0, L_ARENE, H_ARENE);
 		jpnBonus.setOpaque(false);
 		contentPane.add(jpnBonus);
 		jpnBonus.setLayout(null);
-		
+
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, L_ARENE, H_ARENE);
 		lblFond.setIcon(new ImageIcon(FONDARENE));
@@ -100,7 +100,7 @@ public class Arene extends JFrame implements Global {
 
 		txtChat = new JTextArea();
 		jspChat.setViewportView(txtChat);
-		
+
 		if(client){
 			(new Son (SONAMBIANCE)).playContinue();
 			for(int k=0;k<SON.length;k++){
@@ -113,15 +113,16 @@ public class Arene extends JFrame implements Global {
 		jpnMurs.add(objet);
 		jpnMurs.repaint();
 	}
-	
+
 	public void ajoutBonus(JLabel objet){
-		if(jpnBonus.getComponentCount() > 0){
-		try{
-			this.jpnBonus.remove(0);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Array out of bound" + e);
-		}
-		}
+			try
+			{
+				this.jpnBonus.removeAll();
+			} 
+			catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Array out of bound" + e);
+			}
+		
 		this.jpnBonus.add(objet);
 		this.jpnBonus.repaint();
 	}
@@ -134,9 +135,9 @@ public class Arene extends JFrame implements Global {
 		this.jpnBonus.add(objet);
 		this.jpnBonus.repaint();
 		contentPane.requestFocus();
-		
-		}
-	
+
+	}
+
 	public void ajoutPanelMurs(JPanel objet) {
 		jpnMurs.add(objet);
 		jpnMurs.repaint();
@@ -146,11 +147,11 @@ public class Arene extends JFrame implements Global {
 	public JPanel getJpnMurs() {
 		return jpnMurs;
 	}
-	
+
 	public JPanel getJpnBonus(){
 		return jpnBonus;
 	}
-	
+
 	public void ajoutJoueur(JLabel unJoueur) {
 		jpnJeu.add(unJoueur);
 		jpnJeu.repaint();
@@ -164,7 +165,7 @@ public class Arene extends JFrame implements Global {
 		}
 		this.jpnJeu.add(unLabel, num);
 		this.jpnJeu.repaint();
-		
+
 	}
 
 	private void txtSaisie_keyPressed(KeyEvent arg0) {
@@ -176,7 +177,7 @@ public class Arene extends JFrame implements Global {
 			contentPane.requestFocus();
 		}
 	}
-	
+
 	public void ajoutChat(String unePhrase){
 		txtChat.setText(unePhrase +"\r\n" + txtChat.getText());
 	}
@@ -187,11 +188,11 @@ public class Arene extends JFrame implements Global {
 	public String getTxtChat() {
 		return txtChat.getText();
 	}
-	
+
 	public void remplaceChat(String rempChat){
 		txtChat.setText(rempChat);
 	}
-	
+
 	private void contentPane_keyPressed(KeyEvent arg0) {
 		int valeur = -1;
 		switch(arg0.getKeyCode()){
@@ -215,7 +216,7 @@ public class Arene extends JFrame implements Global {
 			controle.evenementVue(this, ACTION+SEPARE+valeur);
 		}
 	}
-	
+
 	public void joueSon(int numSon){
 		lessons[numSon].play();
 	}

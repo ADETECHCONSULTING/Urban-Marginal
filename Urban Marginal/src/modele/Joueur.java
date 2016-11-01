@@ -159,7 +159,6 @@ public class Joueur extends Objet implements Global {
 			lesBonus.get(0).activationBonus(this);
 			lesBonus.remove(0);
 			jeuServeur.afficheBonus();
-		
 	}
 	public void action(int action, Hashtable<Connexion, Joueur> lesJoueurs, ArrayList<Mur> lesMurs, ArrayList<Bonus> lesBonus){
 		switch(action){

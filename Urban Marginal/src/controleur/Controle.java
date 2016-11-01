@@ -116,7 +116,7 @@ public class Controle implements Global {
 		if(ordre == "son"){
 			frmArene.joueSon((Integer)info);
 		}
-		if(ordre == "ajout jpanel bonus"){
+		if(ordre == "ajout JLabel bonus"){
 			frmArene.ajoutBonus((JLabel)info);
 		}
 	}
@@ -130,7 +130,6 @@ public class Controle implements Global {
 		}
 		if(ordre == "ajout bonus"){
 			frmArene.ajoutBonus(((Label)info).getjLabel());
-			
 		}
 		if(ordre == "envoi panel bonus"){
 			((JeuServeur) this.leJeu).envoi((Connexion) info, frmArene.getJpnBonus());
